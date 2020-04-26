@@ -1,0 +1,3 @@
+import nimterop_template/nimterop_template
+
+export nimterop_template
