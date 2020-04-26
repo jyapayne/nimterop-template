@@ -2,7 +2,7 @@ import os, strutils, strformat
 import nimterop/[cimport, build]
 
 const
-  SDLCacheDir* = currentSourcePath.parentDir().parentDir() / "build" #getProjectCacheDir("nimsdl2")
+  ProjectCacheDir* = currentSourcePath.parentDir().parentDir() / "build" #getProjectCacheDir("nimsdl2")
   baseDir = SDLCacheDir
   srcDir = baseDir / "sdl2"
   buildDir = srcDir / "buildcache"
@@ -33,7 +33,7 @@ cOverride:
 
 cPluginPath(symbolPluginPath)
 
-when defined(NimteropTemplate_Static):
-  cImport(NimteropTemplate_Path, recurse = true, flags = "-f=ast2 -E__,_ -F__,_")
+when defined(Project_Static):
+  cImport(Project_Path, recurse = true, flags = "-f=ast2 -E__,_ -F__,_")
 else:
-  cImport(NimteropTemplate_Path, recurse = true, dynlib = "NimteropTemplate_LPath", flags = "-f=ast2 -E__,_ -F__,_")
+  cImport(Project_Path, recurse = true, dynlib = "Project_LPath", flags = "-f=ast2 -E__,_ -F__,_")
